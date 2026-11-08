@@ -1,0 +1,11 @@
+日期：{{date.DATA}}
+城市：{{city.DATA}}
+天气：{{weather.DATA}}
+最低气温：{{min_temperature.DATA}}
+最高气温：{{max_temperature.DATA}}
+在一起：第{{love_day.DATA}}天
+生日提醒一：{{birthday1.DATA}}
+生日提醒二：{{birthday2.DATA}}
+今日一句：{{note_ch.DATA}}
+给你的话：{{note_en.DATA}}
+心愿：今天也要开心哦。

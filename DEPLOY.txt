@@ -1,0 +1,16 @@
+上传清单（只需要这套新项目）
+
+1. 新仓库选Private：含真实密钥、人物和生日，勿公开！
+2. 先停用旧仓库正式定时workflow，避免重复发送。
+3. 解压完整项目ZIP，上传里面全部内容，不是ZIP，不套父文件夹。
+4. 必须上传.github文件夹与.gitignore；Windows开启隐藏项和文件扩展名。
+   两个路径必须是：
+   .github/workflows/weixin.yml
+   .github/workflows/diagnostics.yml
+   不能改成.py，也不能遗漏.github。
+5. 先运行“微信离线诊断（不发消息）”。
+6. 确认后再手动正式推送一次或等定时，都会按原名单发给3人。
+
+已填新完整模板ID和原人物/接口配置，无需重填；新仓库无Secrets即可使用。
+若后来设置非空CONFIG_JSON/TEMPLATE_ID等，它们优先覆盖本地配置，需核对。
+东京时间每日08:00 JST定时（GitHub可能延迟）。本次未上传或启用远程仓库。
