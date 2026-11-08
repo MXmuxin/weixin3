@@ -1,0 +1,36 @@
+name: 微信正式推送（会发给三人）
+on:
+  workflow_dispatch:
+  schedule:
+    # 每日 UTC 23:00 = 次日北京时间 07:00 = 次日东京时间 08:00；保持原 cron 不变。
+    - cron: '0 23 * * *'
+permissions:
+  contents: read
+concurrency:
+  group: weixin-publisher
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      TZ: Asia/Shanghai
+    steps:
+      - uses: actions/checkout@v5
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Offline tests
+        run: python -m unittest discover -s tests -v
+      - name: Publish (sends real messages)
+        env:
+          CONFIG_JSON: ${{ secrets.CONFIG_JSON }}
+          APP_ID: ${{ secrets.APP_ID }}
+          APP_SECRET: ${{ secrets.APP_SECRET }}
+          TEMPLATE_ID: ${{ secrets.TEMPLATE_ID }}
+          WECHAT_USERS: ${{ secrets.WECHAT_USERS }}
+          DETAIL_URL: ${{ secrets.DETAIL_URL }}
+        run: python main.py
