@@ -1,0 +1,26 @@
+name: 微信离线诊断（不发消息）
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Offline diagnostics (no token, no messages)
+        env:
+          TZ: Asia/Shanghai
+          CONFIG_JSON: ${{ secrets.CONFIG_JSON }}
+          APP_ID: ${{ secrets.APP_ID }}
+          APP_SECRET: ${{ secrets.APP_SECRET }}
+          TEMPLATE_ID: ${{ secrets.TEMPLATE_ID }}
+          WECHAT_USERS: ${{ secrets.WECHAT_USERS }}
+          DETAIL_URL: ${{ secrets.DETAIL_URL }}
+        run: python main.py --diagnose
